@@ -10,10 +10,11 @@ export class Cicle {
     this.moduls = [];
   }
   toString() {
-    // Imprime la información del ciclo y sus módulos
     let modulsInfo = "Mòduls: ";
     if (this.moduls.length > 0) {
-      modulsInfo += this.moduls.map(modul => `${modul.nom} (${modul.hores} h)`).join(", ");
+      // Ordena els mòduls pel seu número
+      const modulsOrdenats = this.moduls.sort((a, b) => a.numero - b.numero);
+      modulsInfo += modulsOrdenats.map(modul => `${modul.nom} (${modul.hores} h)`).join(", ");
     } else {
       modulsInfo += "Cap mòdul afegit";
     }
@@ -21,17 +22,26 @@ export class Cicle {
     return `Cicle: ${this.nom}, Durada: ${this.durada} anys, Edicions: ${this.numEdicions}, Última Edició: ${this.ultimaEdicio}, ${modulsInfo}`;
   }
 
-  AfegirModuls(){
-    // Funcion para añadir modulo con un array 
-    
+  afegirModul(modul) {
+    this.moduls.push(modul);
   }
-  CalculHores(){
-    // Funcion para calcular las horas de cada modulo
+
+  calcularHores() {
+    let hores = 0;
+    for (const modul of this.moduls) {
+      hores += modul.hores;
+    }
+    return hores;
   }
   setNumEdicions() {
     this.numEdicions++;
     this.ultimaEdicio = new Date();
-
   }
 }
-
+export class Modul {
+  constructor(numero, nom, hores) {
+    this.numero = numero;
+    this.nom = nom;
+    this.hores = hores;
+  }
+}

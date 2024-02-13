@@ -62,7 +62,7 @@ function printLlistat(llistat) {
     });
 
     document.getElementById("llistat").innerHTML = str;
-    llistat.forEach(function (element, index) {
+    llistat.forEach(function (index) {
         document.getElementById(`removeCicle-${index}`).addEventListener("click", function () {
             removeCicle(index);
         });
@@ -76,13 +76,13 @@ function printLlistat(llistat) {
 }
 //Funció per eliminar un cicle
 function removeCicle(index) {
-    llistatCicles.slice(index);
+    llistatCicles.splice(index,1);
     printLlistat(llistatCicles);
     actualitzarSelector();
 
 }
 function calculHores(i) {
-    alert(i)
+    alert(i);
 }
 
 //Funció per editar un cicle
